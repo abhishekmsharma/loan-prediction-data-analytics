@@ -10,6 +10,8 @@ import numpy as np
 import seaborn as sns
 from matplotlib import pyplot as plt
 import sys
+import warnings
+warnings.filterwarnings("ignore")
 
 def print_horizontal_line():
     print ("-" * 40)
@@ -25,7 +27,15 @@ def data_imputation(df, impute_strategy):
     imr = imr.fit(df)
     imputed_data = imr.transform(df.values)
     return pd.DataFrame(imputed_data, columns=list(df))
-        
+    
+def draw_distribution_plots(df, col_names):
+    del df['Loan_ID']
+    if len(col_names)==0:
+        col_names = list(df)
+    for col in col_names:
+        plt.figure(col+" distribution plot")
+        inc_plot = sns.distplot(df[col], axlabel=col).set_title(col+" distribution plot")
+    plt.show()
     
 if __name__ == "__main__":
     # Reading the dataset
@@ -57,6 +67,8 @@ if __name__ == "__main__":
 
     df[ordinal_cols] = df[ordinal_cols].apply(lambda x: x.cat.codes)
     
+    print_horizontal_line()
+    
     print ("Imputing by mean")
     #taking a copy of loan_ID and deleting
     loan_id_df = df['Loan_ID']
@@ -68,6 +80,8 @@ if __name__ == "__main__":
     df.to_csv('data/data_imputed_mean.csv')
     print ("Mean imputation complete")
     
+    print_horizontal_line()
+    
     print ("Imputing by median")
     #taking a copy of loan_ID and deleting
     loan_id_df = df['Loan_ID']
@@ -78,4 +92,13 @@ if __name__ == "__main__":
     df.insert(0, 'Loan_ID', loan_id_df)
     df.to_csv('data/data_imputed_median.csv')
     print ("Median imputation complete")
+    
+    print_horizontal_line()
+    
+    print ("Drawing distribution plots")
+    draw_distribution_plots(df,[])
+    print ("Distribution plots plotted")
+    
+    print_horizontal_line()
+    
     sys.exit(0)
