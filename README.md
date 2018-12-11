@@ -9,10 +9,9 @@ Statistics calculated on data after removing rows with missing fields.
 
 ############################12/11/2018#############################
 
-1. "data/" folder will be in project directory outside "code" package
-2. Steps to execute the code: 
-  
-  a. In terminal navigate to "loan-prediction-data-analytics" project folder 
-  b. "python -m code.loan_prediction_driver"
+"data/" folder will be in project directory outside "code" package
+Steps to execute the code:   
+1. In terminal navigate to "loan-prediction-data-analytics" project folder 
+2. "python -m code.loan_prediction_driver"
 
 Note: ".py" is not needed since we created a python package. While program execution, plots must be closed for proceeding with program execution
