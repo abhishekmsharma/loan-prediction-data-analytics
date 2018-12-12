@@ -1,8 +1,8 @@
 import pandas as pd
 import numpy as np
 import os
-from code import data_cleaning
-from code import model_train_eval
+import data_cleaning
+import model_train_eval
 import warnings
 warnings.filterwarnings("ignore")
 
